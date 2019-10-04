@@ -1,12 +1,14 @@
 import React from 'react'
 import HouseSummary from './HouseSummary'
 
-const HouseList = () => {
+const HouseList = ({houses}) => {
   return (
     <div className="house-list section">
-      <HouseSummary />
-      <HouseSummary />
-      <HouseSummary />
+      {houses && houses.map(house =>{ 
+        return (
+          <HouseSummary house={house} key={house.id} />
+        )
+      })}
     
     </div>
   )
