@@ -5,6 +5,8 @@ import Dashboard from './components/dashboard/Dashboard'
 import HouseDetails from './components/houses/HouseDetails'
 import SignIn from './components/auth/SignIn';
 import SignUp from './components/auth/SignUp';
+import AddNewHouse from './components/houses/AddNewHouse';
+
 
 function App() {
   return (
@@ -16,6 +18,7 @@ function App() {
           <Route path='/houses/:id' component={HouseDetails}/>
           <Route path ='/signin' component={SignIn} />
           <Route path ='/signup' component={SignUp} />
+          <Route path ='/addhouse' component={AddNewHouse} />
         </Switch>
       </div>
     </BrowserRouter>
