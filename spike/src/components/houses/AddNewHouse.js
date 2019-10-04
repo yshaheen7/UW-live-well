@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { addHouse } from '../../store/actions/houseActions'
 
-class addHouse extends Component {
+class AddNewHouse extends Component {
   state = {
     title:'',
     content: ''
@@ -9,11 +11,10 @@ class addHouse extends Component {
     this.setState({
       [e.target.id]: e.target.value
     })
-    console.log(e);
   }
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
+    this.props.addHouse(this.state)
   }
   render() {
     return(
@@ -37,4 +38,9 @@ class addHouse extends Component {
   }
 }
 
-export default addHouse
+const mapDispatchToProps = (dispatch) =>{
+  return {
+    addHouse: (house) => dispatch(addHouse(house))
+  }
+}
+export default connect(null, mapDispatchToProps)(AddNewHouse)

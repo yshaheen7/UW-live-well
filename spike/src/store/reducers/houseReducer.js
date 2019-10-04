@@ -7,6 +7,11 @@ const initState = {
 }
 
 const houseReducer = (state = initState, action) => {
+  switch (action.type) {
+    case 'ADD_HOUSE':
+      console.log('add house', action.house)
+  
+  }
   return state
 }
 
