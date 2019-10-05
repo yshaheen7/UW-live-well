@@ -6,6 +6,8 @@ import { Redirect } from 'react-router-dom'
 class AddNewHouse extends Component {
   state = {
     address:'',
+    price: '',
+    preference: '',
     details: ''
   }
   handleChange = (e) => {
@@ -31,7 +33,15 @@ class AddNewHouse extends Component {
             <input type="text" id="address" onChange={this.handleChange}/>
           </div>
           <div className="input-field">
-            <label htmlFor="details">Details</label>
+            <label htmlFor="address">Price</label>
+            <input type="text" id="price" onChange={this.handleChange}/>
+          </div>
+          <div className="input-field">
+            <label htmlFor="preference">Sharing Preference</label>
+            <input type="text" id="preference" onChange={this.handleChange}/>
+          </div>
+          <div className="input-field">
+            <label htmlFor="details">More Details</label>
             <textarea id="details" className="materialize-textarea" onChange={this.handleChange}></textarea>
           </div>
           <div className="input-field">
