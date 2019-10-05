@@ -8,7 +8,7 @@ class AddNewHouse extends Component {
     address:'',
     price: '',
     preference: '',
-    details: ''
+    details: '',
   }
   handleChange = (e) => {
     this.setState({
