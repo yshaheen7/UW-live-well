@@ -1,21 +1,47 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { firestoreConnect } from 'react-redux-firebase'
+import { compose } from 'redux'
 
 const HouseDetails = (props) => {
-  const id = props.match.params.id;
-  return (
-    <div className="container section house-details">
-      <div className="card z-depth-0">
-        <div className="card-content">
-          <span className="card-title">House Ttitle {id}</span>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis eos nesciunt id, possimus rerum sequi vel voluptatum molestiae adipisci, ad accusantium ab porro quo facere recusandae non accusamus cumque amet.</p>
-        </div>
-        <div className="card-action grey lighten-4 grey-txt">
-          <div>Posted by USER</div>
-          <div>1/1/1990</div>
+  //getting the house property from the props and store in that constant
+  //then check if you have an output, and return some JSX if you have 
+  //any houses
+  const { house } = props;
+  if (house) {
+    return(
+      <div className="container section house-details">
+        <div className="card z-depth-0">
+          <div className="card-content">
+            <span className="card-title">{ house.address }</span>
+            <p>{ house.details }</p>
+          </div>
+          <div className="card-action grey lighten-4 grey-txt">
+            <div>Posted by { house.authorFirstName } { house.authorLastName }</div>
+            <div>1/1/1990</div>
+          </div>
         </div>
       </div>
-    </div>
-  )
-}
+    )} else {
+    return (
+      <div className="container center">
+        <p>Loading project...</p>
+      </div>
+     )
+} }
 
-export default HouseDetails
+const mapStateToProps = (state, ownProps) => {
+  //console.log(state);
+  const id = ownProps.match.params.id;
+  const houses = state.firestore.data.houses;
+  const house = houses ? houses[id] : null
+  return {
+    house: house
+  }
+}
+export default compose(
+  connect(mapStateToProps),
+  firestoreConnect([
+    {collection: 'houses'}
+  ])
+)(HouseDetails)

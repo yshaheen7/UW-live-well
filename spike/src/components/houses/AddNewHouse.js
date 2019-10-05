@@ -4,8 +4,8 @@ import { addHouse } from '../../store/actions/houseActions'
 
 class AddNewHouse extends Component {
   state = {
-    title:'',
-    content: ''
+    address:'',
+    details: ''
   }
   handleChange = (e) => {
     this.setState({
@@ -22,12 +22,12 @@ class AddNewHouse extends Component {
         <form onSubmit={this.handleSubmit} className="white">
           <h5 className="grey-text text-darken-3">Add House</h5>
           <div className="input-field">
-            <label htmlFor="title">Title</label>
-            <input type="text" id="title" onChange={this.handleChange}/>
+            <label htmlFor="address">Address</label>
+            <input type="text" id="address" onChange={this.handleChange}/>
           </div>
           <div className="input-field">
-            <label htmlFor="content">House Content</label>
-            <textarea id="content" className="materialize-textarea" onChange={this.handleChange}></textarea>
+            <label htmlFor="details">Details</label>
+            <textarea id="details" className="materialize-textarea" onChange={this.handleChange}></textarea>
           </div>
           <div className="input-field">
             <button className="btn pink lighten-1 z-depth-0">Add</button>
