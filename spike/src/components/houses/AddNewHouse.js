@@ -18,6 +18,7 @@ class AddNewHouse extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.addHouse(this.state)
+    this.props.history.push('/');
   }
   render() {
     const { auth } = this.props;
