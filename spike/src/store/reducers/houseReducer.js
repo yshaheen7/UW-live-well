@@ -10,9 +10,13 @@ const houseReducer = (state = initState, action) => {
   switch (action.type) {
     case 'ADD_HOUSE':
       console.log('add house', action.house)
-  
+      return state;
+    case 'ADD_HOUSE_ERROR':
+      console.log('add_house error');
+      return state;
+    default:
+      return state;
   }
-  return state
 }
 
 export default houseReducer
