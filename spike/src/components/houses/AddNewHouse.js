@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { addHouse } from '../../store/actions/houseActions'
+import { Redirect } from 'react-router-dom'
 
 class AddNewHouse extends Component {
   state = {
@@ -17,6 +18,10 @@ class AddNewHouse extends Component {
     this.props.addHouse(this.state)
   }
   render() {
+    const { auth } = this.props;
+    //if user is not logged in, redirect
+    if(!auth.uid) return <Redirect to='/signin' />
+    
     return(
       <div className ="container">
         <form onSubmit={this.handleSubmit} className="white">
@@ -38,9 +43,15 @@ class AddNewHouse extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    auth: state.firebase.auth
+  }
+}
+
 const mapDispatchToProps = (dispatch) =>{
   return {
     addHouse: (house) => dispatch(addHouse(house))
   }
 }
-export default connect(null, mapDispatchToProps)(AddNewHouse)
+export default connect(mapStateToProps, mapDispatchToProps)(AddNewHouse)

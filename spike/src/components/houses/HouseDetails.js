@@ -2,12 +2,17 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
+import { Redirect } from 'react-router-dom'
+
 
 const HouseDetails = (props) => {
   //getting the house property from the props and store in that constant
   //then check if you have an output, and return some JSX if you have 
   //any houses
-  const { house } = props;
+  const { house, auth } = props;
+  //if user is not logged in, redirect
+  if(!auth.uid) return <Redirect to='/signin' />
+
   if (house) {
     return(
       <div className="container section house-details">
@@ -25,7 +30,7 @@ const HouseDetails = (props) => {
     )} else {
     return (
       <div className="container center">
-        <p>Loading project...</p>
+        <p>Loading house...</p>
       </div>
      )
 } }
@@ -36,7 +41,8 @@ const mapStateToProps = (state, ownProps) => {
   const houses = state.firestore.data.houses;
   const house = houses ? houses[id] : null
   return {
-    house: house
+    house: house,
+    auth: state.firebase.auth
   }
 }
 export default compose(

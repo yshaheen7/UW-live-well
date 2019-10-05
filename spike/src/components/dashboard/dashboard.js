@@ -3,11 +3,14 @@ import HouseList from '../houses/HouseList'
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
+import { Redirect } from 'react-router-dom'
 
 class Dashboard extends Component {
   render(){
     //console.log(this.props)
-    const { houses } = this.props;
+    const { houses, auth } = this.props;
+    //if user is not logged in, redirect
+    if(!auth.uid) return <Redirect to='/signin' />
 
     return (
       <div className="dashboard container center">
@@ -20,7 +23,8 @@ class Dashboard extends Component {
 const mapStateToProps = (state) => {
   console.log(state);
   return {
-    houses: state.firestore.ordered.houses
+    houses: state.firestore.ordered.houses,
+    auth: state.firebase.auth
   }
 }
 
@@ -30,3 +34,5 @@ export default compose(
     { collection: 'houses' }
   ])
 )(Dashboard)
+
+    
